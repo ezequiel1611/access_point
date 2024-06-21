@@ -21,6 +21,9 @@ void initWebSocket();
 // variables
 const char* ssid = "ControlDeNivel";
 const char* password = "patronato1914";
+double qin = 22.24;
+double qout = 21.56;
+int pwm = 756;
 
 IPAddress ip(192,168,1,200);     
 IPAddress gateway(192,168,1,1);   
@@ -64,7 +67,12 @@ void loop() {
 
 // put function definitions here:
 String getSensorReadings(){
-  readings["potenciometro"] = String(analogRead(potentiometer));
+  int nivel = analogRead(potentiometer);
+  nivel = map(nivel,0,1023,0,45);
+  readings["nivel"] = String(nivel);
+  readings["qin"] = String(qin);
+  readings["qout"] = String(qout);
+  readings["pwm"] = String(pwm);
   String jsonString = JSON.stringify(readings);
   return jsonString;
 }
@@ -103,6 +111,7 @@ void handleWebSocketMessage(void *arg, uint8_t *data, size_t len){
     }
     else{
       int value = message.toInt();
+      value = map(value,10,40,0,1023);
       analogWrite(led_pwm,value);
     }
   }

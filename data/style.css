@@ -93,3 +93,36 @@ body {
     cursor: pointer;
     /* Cursor on hover */
 }
+
+#mi-imagen {
+    position: absolute; /* Opción: puedes usar 'fixed' si quieres que la imagen se mantenga fija en la ventana */
+    top: 214px;
+    left: calc(50% - 126px);
+    z-index: 9999; /* Asegura que la imagen esté en el frente */
+    width: 256px;
+    height: 256px;
+}
+
+/* Nuevo estilo para el contenedor de la barra */
+#nivel-container {
+    bottom: 50px;
+    height: 172px; /* Altura del contenedor de la barra */
+    width: 120px;   /* Ancho del contenedor de la barra */
+    background-color: #e0e0e0; /* Color de fondo del contenedor */
+    position: relative;
+    margin: 0 auto;
+    border: 1px solid #ccc; /* Borde opcional para mejor visualización */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Nuevo estilo para la barra de nivel */
+.nivel-bar {
+    width: 100%; /* La barra ocupa todo el ancho del contenedor */
+    background-color: #1282A2; /* Color azul de la barra */
+    position: absolute;
+    bottom: 0;
+    height: 0; /* Altura inicial de la barra */
+    transition: height 0.5s; /* Transición suave para cambios de altura */
+}
