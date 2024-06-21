@@ -50,3 +50,9 @@ function onMessage(event) {
         document.getElementById(key).innerHTML = myObj[key];
     }
 }
+
+function updateSliderPWM(element) {
+    var sliderValue = document.getElementById(element.id).value;
+    console.log(sliderValue);
+    websocket.send(sliderValue.toString());
+}
