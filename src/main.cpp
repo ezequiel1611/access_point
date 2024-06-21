@@ -29,6 +29,7 @@ IPAddress subnet(255,255,255,0);
 AsyncWebServer server(80);
 AsyncWebSocket ws("/ws");
 JSONVar readings;
+String message = "";
 
 unsigned long lastTime=0;
 
@@ -93,9 +94,17 @@ void notifyClients(String sensorReadings){
 void handleWebSocketMessage(void *arg, uint8_t *data, size_t len){
   AwsFrameInfo *info = (AwsFrameInfo*)arg;
   if(info->final && info->index == 0 && info->len == len && info->opcode == WS_TEXT){
-    String sensorReadings = getSensorReadings();
-    Serial.print(sensorReadings);
-    notifyClients(sensorReadings);
+    message = String((char*)data);
+
+    if(message.equals("getReadings")){
+      String sensorReadings = getSensorReadings();
+      Serial.print(sensorReadings);
+      notifyClients(sensorReadings);
+    }
+    else{
+      int value = message.toInt();
+      analogWrite(led_pwm,value);
+    }
   }
 }
 

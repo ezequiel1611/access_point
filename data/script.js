@@ -3,7 +3,7 @@ var websocket;
 // Init web socket when the page loads
 window.addEventListener('load', onload);
 
-var slider = document.getElementById("myRange");
+var slider = document.getElementById("nivel");
 var output = document.getElementById("demo");
 output.innerHTML = slider.value; // Display the default slider value
 
